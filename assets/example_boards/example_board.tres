@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="Board" format=3 uid="uid://dfivt0417d2gf"]
+
+[ext_resource type="Script" uid="uid://dv2gyp62x2n7q" path="res://script/resources/column.gd" id="1_soi5w"]
+[ext_resource type="Script" uid="uid://cmf1qb2i051y5" path="res://script/resources/question.gd" id="2_wu0n7"]
+[ext_resource type="Script" uid="uid://cwufo10ewgb6x" path="res://script/resources/board.gd" id="3_pcfq3"]
+
+[sub_resource type="Resource" id="Resource_ck11k"]
+script = ExtResource("2_wu0n7")
+text = "This iron tower is a well-known monument in France."
+answer_text = "What is the Eiffel Tower ?."
+metadata/_custom_type_script = "uid://cmf1qb2i051y5"
+
+[sub_resource type="Resource" id="Resource_g2jkl"]
+script = ExtResource("2_wu0n7")
+text = "This country is under embargo from the United States since the 1960s."
+answer_text = "What is Cuba ?"
+worth = 200
+metadata/_custom_type_script = "uid://cmf1qb2i051y5"
+
+[sub_resource type="Resource" id="Resource_3jlsa"]
+script = ExtResource("1_soi5w")
+title = "Geography"
+questions = Array[ExtResource("2_wu0n7")]([SubResource("Resource_ck11k"), SubResource("Resource_g2jkl")])
+metadata/_custom_type_script = "uid://dv2gyp62x2n7q"
+
+[sub_resource type="Resource" id="Resource_2t0xb"]
+script = ExtResource("2_wu0n7")
+text = "This operator recusiverly multiplies integers."
+answer_text = "What is the factorial operator \"!\" ?"
+metadata/_custom_type_script = "uid://cmf1qb2i051y5"
+
+[sub_resource type="Resource" id="Resource_o1d60"]
+script = ExtResource("2_wu0n7")
+text = "|x|^n + |y|^n = r^n"
+answer_text = "What is the superelipse formula ?"
+worth = 200
+metadata/_custom_type_script = "uid://cmf1qb2i051y5"
+
+[sub_resource type="Resource" id="Resource_71qcl"]
+script = ExtResource("1_soi5w")
+title = "Math"
+questions = Array[ExtResource("2_wu0n7")]([SubResource("Resource_2t0xb"), SubResource("Resource_o1d60")])
+metadata/_custom_type_script = "uid://dv2gyp62x2n7q"
+
+[resource]
+script = ExtResource("3_pcfq3")
+board_name = "Example Board"
+columns = Array[ExtResource("1_soi5w")]([SubResource("Resource_3jlsa"), SubResource("Resource_71qcl")])
+metadata/_custom_type_script = "uid://cwufo10ewgb6x"

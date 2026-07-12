@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://c3selklkp2m3q"]
+
+[ext_resource type="Script" uid="uid://hdrna60shnql" path="res://scenes/game/question_column.gd" id="1_8pk4t"]
+[ext_resource type="PackedScene" uid="uid://c408m46rey76o" path="res://scenes/game/question_button.tscn" id="2_kfpei"]
+
+[node name="QuestionColumn" type="VBoxContainer" unique_id=303164309 node_paths=PackedStringArray("label", "sep")]
+offset_right = 680.0
+offset_bottom = 384.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8pk4t")
+label = NodePath("Label")
+sep = NodePath("HSeparator")
+
+[node name="Label" type="Label" parent="." unique_id=1523190846]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Name of the Column"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=792363296]
+layout_mode = 2
+
+[node name="Button" parent="." unique_id=1027874463 instance=ExtResource("2_kfpei")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 70

@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cqhu6autyl6xb"]
+
+[ext_resource type="Texture2D" uid="uid://cv64pwborui8j" path="res://assets/textures/test/crux.png" id="1_5okdm"]
+[ext_resource type="Theme" uid="uid://vt1g3bkksiil" path="res://assets/default_theme.tres" id="1_ii0do"]
+[ext_resource type="Script" uid="uid://khf8vqmdfg53" path="res://scenes/game/presentation.gd" id="2_11pcq"]
+[ext_resource type="PackedScene" uid="uid://b3ytmq2fyw35u" path="res://scenes/game/audio_player_ui.tscn" id="3_11pcq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5v64u"]
+
+[node name="Presentation" type="TabContainer" unique_id=1897908289 node_paths=PackedStringArray("question_half", "question_category_title", "question_label", "question_texture_rect", "question_player", "reveal_answer_button", "answer_half", "answer_category_title", "answer_label", "answer_texture_rect", "see_question_again_button", "back_to_board_button")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ii0do")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_5v64u")
+current_tab = 1
+tabs_visible = false
+script = ExtResource("2_11pcq")
+question_half = NodePath("Question")
+question_category_title = NodePath("Question/Label")
+question_label = NodePath("Question/CenterContainer/VBoxContainer/Label")
+question_texture_rect = NodePath("Question/CenterContainer/VBoxContainer/TextureRect")
+question_player = NodePath("Question/CenterContainer/VBoxContainer/HBoxContainer")
+reveal_answer_button = NodePath("Question/RevealAnswer")
+answer_half = NodePath("Answer")
+answer_category_title = NodePath("Answer/Label")
+answer_label = NodePath("Answer/CenterContainer/VBoxContainer/Label")
+answer_texture_rect = NodePath("Answer/CenterContainer/VBoxContainer/TextureRect")
+see_question_again_button = NodePath("Answer/HBoxContainer/BackToQuestion")
+back_to_board_button = NodePath("Answer/HBoxContainer/BackToBoard")
+metadata/_tab_index = 1
+
+[node name="Question" type="VBoxContainer" parent="." unique_id=642839384]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Label" type="Label" parent="Question" unique_id=1080089803]
+layout_mode = 2
+text = "Column Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="MarginContainer" parent="Question" unique_id=1315257200]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Question/CenterContainer" unique_id=553440752]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Question/CenterContainer/VBoxContainer" unique_id=87854338]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "This country is under U.S embargo since the 1960s in the Atlantic Ocean."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Question/CenterContainer/VBoxContainer" unique_id=1656782412]
+custom_maximum_size = Vector2(-1, 800)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_5okdm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" parent="Question/CenterContainer/VBoxContainer" unique_id=1993156694 instance=ExtResource("3_11pcq")]
+custom_minimum_size = Vector2(800, -1)
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="RevealAnswer" type="Button" parent="Question" unique_id=1416721736]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Reveal Answer"
+
+[node name="Answer" type="VBoxContainer" parent="." unique_id=658066149]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Label" type="Label" parent="Answer" unique_id=1329490260]
+layout_mode = 2
+text = "Column Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CenterContainer" type="MarginContainer" parent="Answer" unique_id=1354740013]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Answer/CenterContainer" unique_id=1493110745]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Answer/CenterContainer/VBoxContainer" unique_id=334598938]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "This country is under U.S embargo since the 1960s in the Atlantic Ocean."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TextureRect" type="TextureRect" parent="Answer/CenterContainer/VBoxContainer" unique_id=797781635]
+custom_maximum_size = Vector2(-1, 800)
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("1_5okdm")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxContainer" parent="Answer/CenterContainer/VBoxContainer" unique_id=454385542 instance=ExtResource("3_11pcq")]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Answer" unique_id=1937348969]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="BackToQuestion" type="Button" parent="Answer/HBoxContainer" unique_id=1719996585]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "See question again"
+
+[node name="HSeparator" type="HSeparator" parent="Answer/HBoxContainer" unique_id=862217878]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BackToBoard" type="Button" parent="Answer/HBoxContainer" unique_id=1201885090]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Back to the board"

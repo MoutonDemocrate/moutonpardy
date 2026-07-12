@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://m0qd0slfcsc4"]
+
+[ext_resource type="Texture2D" uid="uid://b6tycofdtfg6o" path="res://assets/textures/test/house.png" id="1_6khf7"]
+[ext_resource type="Script" uid="uid://c6fhq1mdlcgo4" path="res://scenes/board_editor/texture_picker.gd" id="1_oylfs"]
+
+[node name="TexturePicker" type="HBoxContainer" unique_id=283436648 node_paths=PackedStringArray("texture_rect", "select_button", "clear_button", "file_dialog")]
+offset_right = 576.0
+offset_bottom = 201.0
+size_flags_horizontal = 3
+script = ExtResource("1_oylfs")
+texture_rect = NodePath("TextureRect")
+select_button = NodePath("VBoxContainer/SelectButton")
+clear_button = NodePath("VBoxContainer/ClearButton")
+file_dialog = NodePath("FileDialog")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=345961080]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_6khf7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=504906435]
+custom_minimum_size = Vector2(159.605, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="SelectButton" type="Button" parent="VBoxContainer" unique_id=1756800723]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Select
+Image"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer" unique_id=264145443]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=1385112691]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1101, 598)
+ok_button_text = "Select Image"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.svg;Image Files;image/png,image/jpeg,image/svg+xml")
+use_native_dialog = true

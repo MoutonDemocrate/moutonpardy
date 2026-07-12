@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://de4v5i541e8a"]
+
+[ext_resource type="PackedScene" uid="uid://nwtbhkanoa1u" path="res://scenes/game/board_tab.tscn" id="1_llaio"]
+[ext_resource type="Script" uid="uid://bm0nq6snrdmpp" path="res://scenes/game/main.gd" id="1_oekm8"]
+[ext_resource type="Theme" uid="uid://vt1g3bkksiil" path="res://assets/default_theme.tres" id="1_uaf1y"]
+[ext_resource type="PackedScene" uid="uid://cqhu6autyl6xb" path="res://scenes/game/presentation.tscn" id="3_yd8kv"]
+[ext_resource type="PackedScene" uid="uid://vert5lkay221" path="res://scenes/game/new_board.tscn" id="5_g38uy"]
+[ext_resource type="PackedScene" uid="uid://cu2nsdqpp16ct" path="res://scenes/game/team_panel.tscn" id="5_iba00"]
+[ext_resource type="Script" uid="uid://d2aufer4foyw4" path="res://scenes/game/team_panels_container.gd" id="5_j7lav"]
+[ext_resource type="PackedScene" uid="uid://2wpdykt8uw7t" path="res://scenes/game/victory_tab.tscn" id="6_5v64u"]
+
+[node name="Main" type="PanelContainer" unique_id=1936652858 node_paths=PackedStringArray("board_tab", "presentation_tab", "new_board_tab", "victory_tab", "teams_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uaf1y")
+script = ExtResource("1_oekm8")
+board_tab = NodePath("VBoxContainer/TabContainer/BoardView")
+presentation_tab = NodePath("VBoxContainer/TabContainer/Presentation")
+new_board_tab = NodePath("VBoxContainer/TabContainer/NewBoard")
+victory_tab = NodePath("VBoxContainer/TabContainer/VictoryTab")
+teams_container = NodePath("VBoxContainer/TeamPanelsContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1389529673]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer" unique_id=728809004]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+tabs_visible = false
+
+[node name="BoardView" parent="VBoxContainer/TabContainer" unique_id=705931955 instance=ExtResource("1_llaio")]
+layout_mode = 2
+
+[node name="Presentation" parent="VBoxContainer/TabContainer" unique_id=1366760248 instance=ExtResource("3_yd8kv")]
+visible = false
+layout_mode = 2
+
+[node name="NewBoard" parent="VBoxContainer/TabContainer" unique_id=1239053760 instance=ExtResource("5_g38uy")]
+visible = false
+layout_mode = 2
+
+[node name="VictoryTab" parent="VBoxContainer/TabContainer" unique_id=663287037 instance=ExtResource("6_5v64u")]
+visible = false
+layout_mode = 2
+
+[node name="TeamPanelsContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1718153377]
+layout_mode = 2
+offset_transform_enabled = true
+script = ExtResource("5_j7lav")
+
+[node name="TeamPanel" parent="VBoxContainer/TeamPanelsContainer" unique_id=170116313 instance=ExtResource("5_iba00")]
+layout_mode = 2

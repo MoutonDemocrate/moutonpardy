@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bam6eu8c65f4w"]
+
+[ext_resource type="Script" uid="uid://cff8lp15twgqx" path="res://scenes/board_editor/editor_question_button.gd" id="1_tpe8c"]
+
+[node name="EditorQuestionButton" type="Button" unique_id=100682392]
+custom_minimum_size = Vector2(0, 100)
+custom_maximum_size = Vector2(-1, 300)
+size_flags_vertical = 3
+text = "100"
+script = ExtResource("1_tpe8c")

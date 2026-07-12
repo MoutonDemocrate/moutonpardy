@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://c1q34oigmktf7"]
+
+[ext_resource type="Script" uid="uid://ru6u7vgkcsix" path="res://scenes/board_editor/board_editor.gd" id="1_3gk7l"]
+[ext_resource type="Resource" uid="uid://dfivt0417d2gf" path="res://assets/example_boards/example_board.tres" id="2_3jlsa"]
+[ext_resource type="PackedScene" uid="uid://c7j2c002r5mj3" path="res://scenes/board_editor/v_box_column_editor.tscn" id="3_2t0xb"]
+[ext_resource type="Script" uid="uid://c40vagnxgdhax" path="res://scenes/board_editor/sidebar.gd" id="3_71qcl"]
+[ext_resource type="PackedScene" uid="uid://m0qd0slfcsc4" path="res://scenes/board_editor/texture_picker.tscn" id="3_ck11k"]
+[ext_resource type="Script" uid="uid://dmvot60ws3pp5" path="res://scenes/board_editor/main_half.gd" id="3_o1d60"]
+[ext_resource type="PackedScene" uid="uid://bbrc58kvt534l" path="res://scenes/board_editor/sound_picker.tscn" id="4_g2jkl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_br48t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ck11k"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0.27450982)
+
+[node name="Board Editor" type="HSplitContainer" unique_id=1785923000 node_paths=PackedStringArray("main_half", "sidebar")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(1518)
+drag_area_highlight_in_editor = true
+split_offset = 1518
+script = ExtResource("1_3gk7l")
+current_board = ExtResource("2_3jlsa")
+main_half = NodePath("MainHalf")
+sidebar = NodePath("Sidebar")
+
+[node name="MainHalf" type="VBoxContainer" parent="." unique_id=109555816 node_paths=PackedStringArray("editor", "board_name_edit", "column_container", "add_column_button")]
+layout_mode = 2
+script = ExtResource("3_o1d60")
+editor = NodePath("..")
+board_name_edit = NodePath("PanelContainer/HBoxContainer/BoardNameEdit")
+column_container = NodePath("ScrollContainer/HBoxContainer")
+add_column_button = NodePath("ScrollContainer/HBoxContainer/Add a category")
+
+[node name="PanelContainer" type="PanelContainer" parent="MainHalf" unique_id=410889447]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHalf/PanelContainer" unique_id=926276469]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainHalf/PanelContainer/HBoxContainer" unique_id=1442296705]
+layout_mode = 2
+text = "Board name : "
+
+[node name="BoardNameEdit" type="LineEdit" parent="MainHalf/PanelContainer/HBoxContainer" unique_id=162890721]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ex: \"Nature, Fauna and Flora\""
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainHalf" unique_id=1210067503]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_br48t")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainHalf/ScrollContainer" unique_id=1524471557]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxColumnEditor" parent="MainHalf/ScrollContainer/HBoxContainer" unique_id=1133123002 instance=ExtResource("3_2t0xb")]
+layout_mode = 2
+
+[node name="Add a category" type="Button" parent="MainHalf/ScrollContainer/HBoxContainer" unique_id=2073294946]
+modulate = Color(1, 1, 1, 0.7019608)
+custom_minimum_size = Vector2(150, 0)
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MainHalf/ScrollContainer/HBoxContainer/Add a category" unique_id=1564154812]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -22.5
+offset_right = 0.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5707964
+pivot_offset = Vector2(150, 30)
+text = "+ Add a category ..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sidebar" type="PanelContainer" parent="." unique_id=1103233131 node_paths=PackedStringArray("spin_box_worth", "question_text_edit", "question_image_picker", "question_sound_picker", "answer_text_edit", "answer_image_picker", "answer_sound_picker")]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ck11k")
+script = ExtResource("3_71qcl")
+spin_box_worth = NodePath("VBoxSideBar/PointsWorth/SpinBox")
+question_text_edit = NodePath("VBoxSideBar/QuestionText/QuestionTextEdit")
+question_image_picker = NodePath("VBoxSideBar/QuestionImage/TexturePicker")
+question_sound_picker = NodePath("VBoxSideBar/QuestionSound/SoundPicker")
+answer_text_edit = NodePath("VBoxSideBar/AnswerText/AnswerTextEdit")
+answer_image_picker = NodePath("VBoxSideBar/AnswerImage/TexturePicker")
+answer_sound_picker = NodePath("VBoxSideBar/AnswerSound/SoundPicker")
+
+[node name="VBoxSideBar" type="VBoxContainer" parent="Sidebar" unique_id=1274684288]
+layout_mode = 2
+
+[node name="Questions" type="Label" parent="Sidebar/VBoxSideBar" unique_id=592404285]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Question Editor"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Sidebar/VBoxSideBar" unique_id=73945754]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PointsWorth" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=595937313]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/PointsWorth" unique_id=2014447648]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Points Worth : "
+horizontal_alignment = 2
+
+[node name="SpinBox" type="SpinBox" parent="Sidebar/VBoxSideBar/PointsWorth" unique_id=484556670]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -99999.0
+max_value = 99999.0
+rounded = true
+
+[node name="QuestionText" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1140757844]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionText" unique_id=909870381]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Question
+Text : "
+horizontal_alignment = 2
+
+[node name="QuestionTextEdit" type="TextEdit" parent="Sidebar/VBoxSideBar/QuestionText" unique_id=978327112]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ex: This French iron tower is a symbol of the city of Paris."
+wrap_mode = 1
+scroll_smooth = true
+scroll_past_end_of_file = true
+
+[node name="QuestionImage" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1708137138]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionImage" unique_id=1403063694]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Image : "
+horizontal_alignment = 2
+
+[node name="TexturePicker" parent="Sidebar/VBoxSideBar/QuestionImage" unique_id=283436648 instance=ExtResource("3_ck11k")]
+layout_mode = 2
+
+[node name="QuestionSound" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1791702157]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionSound" unique_id=757043412]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Sound : "
+horizontal_alignment = 2
+
+[node name="SoundPicker" parent="Sidebar/VBoxSideBar/QuestionSound" unique_id=659805472 instance=ExtResource("4_g2jkl")]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Sidebar/VBoxSideBar" unique_id=1484690500]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AnswerText" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1067749790]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerText" unique_id=1531385688]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Answer : "
+horizontal_alignment = 2
+
+[node name="AnswerTextEdit" type="TextEdit" parent="Sidebar/VBoxSideBar/AnswerText" unique_id=1392964960]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ex: Eiffel Tower"
+wrap_mode = 1
+scroll_smooth = true
+scroll_past_end_of_file = true
+
+[node name="AnswerImage" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=545530723]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerImage" unique_id=1415318926]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Answer
+Image : "
+horizontal_alignment = 2
+
+[node name="TexturePicker" parent="Sidebar/VBoxSideBar/AnswerImage" unique_id=931704544 instance=ExtResource("3_ck11k")]
+layout_mode = 2
+
+[node name="AnswerSound" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=700636034]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerSound" unique_id=502342166]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Answer
+Sound : "
+horizontal_alignment = 2
+
+[node name="SoundPicker" parent="Sidebar/VBoxSideBar/AnswerSound" unique_id=2145516111 instance=ExtResource("4_g2jkl")]
+layout_mode = 2

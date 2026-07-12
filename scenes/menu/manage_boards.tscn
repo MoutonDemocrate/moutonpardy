@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6sxnib2jaqmp"]
+
+[ext_resource type="Script" uid="uid://d2xcpcpkhp36r" path="res://scenes/menu/manage_boards.gd" id="1_xluad"]
+
+[node name="Manage Boards" type="CenterContainer" unique_id=1213982618]
+visible = false
+script = ExtResource("1_xluad")
+metadata/_tab_index = 2

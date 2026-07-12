@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://8lcxvr4evx2j"]
+
+[ext_resource type="Script" uid="uid://wtrksxmphrtb" path="res://scenes/menu/board_management_control.gd" id="1_7eyk1"]
+
+[node name="BoardManagementControl" type="VBoxContainer" unique_id=30762810 node_paths=PackedStringArray("board_name_label", "board_path_label", "edit_button", "trash_button", "detail_label", "top_control", "bottom_control")]
+offset_right = 903.0
+offset_bottom = 142.0
+script = ExtResource("1_7eyk1")
+board_name_label = NodePath("TopPart/VBoxContainer/BoardName")
+board_path_label = NodePath("TopPart/VBoxContainer/BoardPath")
+edit_button = NodePath("TopPart/VBoxContainer2/EditButton")
+trash_button = NodePath("TopPart/VBoxContainer2/TrashButton")
+detail_label = NodePath("PanelContainer/MarginContainer/Label")
+top_control = NodePath("TopPart")
+bottom_control = NodePath("PanelContainer")
+
+[node name="TopPart" type="HBoxContainer" parent="." unique_id=741358592]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopPart" unique_id=703646310]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BoardName" type="Label" parent="TopPart/VBoxContainer" unique_id=1621708679]
+layout_mode = 2
+text = "\"Example board\""
+
+[node name="BoardPath" type="Label" parent="TopPart/VBoxContainer" unique_id=1261364209]
+self_modulate = Color(1, 1, 1, 0.52156866)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "/path/to/board/in/the/user's/filesystem/which/can/be/rather/long"
+autowrap_mode = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TopPart" unique_id=1816982147]
+layout_mode = 2
+
+[node name="EditButton" type="Button" parent="TopPart/VBoxContainer2" unique_id=516014346]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Edit this board"
+text = "✏️"
+
+[node name="TrashButton" type="Button" parent="TopPart/VBoxContainer2" unique_id=1380332081]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Delete that board forever
+(a long time)"
+text = "🗑️"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1069142471]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=283369894]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer" unique_id=2139852664]
+layout_mode = 2
+text = "Categories :
+• Geography (100, 200)
+
+Modified last on 1st December 2026"

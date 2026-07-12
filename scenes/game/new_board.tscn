@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://vert5lkay221"]
+
+[ext_resource type="Script" uid="uid://dblikg5tceg6c" path="res://scenes/game/new_board.gd" id="1_8as5g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8as5g"]
+
+[node name="NewBoard" type="CenterContainer" unique_id=1239053760 node_paths=PackedStringArray("name_label", "multiplier_label", "ready_button")]
+offset_right = 1920.0
+offset_bottom = 1080.0
+script = ExtResource("1_8as5g")
+name_label = NodePath("VBoxContainer/BoardName")
+multiplier_label = NodePath("VBoxContainer/MultiplierValue")
+ready_button = NodePath("VBoxContainer/ReadyButton")
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1077190146]
+layout_mode = 2
+
+[node name="NEXT" type="Label" parent="VBoxContainer" unique_id=120331928]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "NEXT BOARD"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoardName" type="Label" parent="VBoxContainer" unique_id=689145064]
+custom_minimum_size = Vector2(1700, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 130
+text = "\"The Big One\""
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=797350914]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8as5g")
+
+[node name="POINTS" type="Label" parent="VBoxContainer" unique_id=124988849]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "POINTS RANGING FROM..."
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 5
+
+[node name="MultiplierValue" type="Label" parent="VBoxContainer" unique_id=35771590]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "×10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=682292111]
+layout_mode = 2
+theme_override_constants/separation = 50
+theme_override_styles/separator = SubResource("StyleBoxEmpty_8as5g")
+
+[node name="ReadyButton" type="Button" parent="VBoxContainer" unique_id=1721753037]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "READY"

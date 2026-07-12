@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://b3ytmq2fyw35u"]
+
+[ext_resource type="Script" uid="uid://bpg8yfqq0ujen" path="res://scenes/game/audio_player_ui.gd" id="1_vgynl"]
+[ext_resource type="AudioStream" uid="uid://c28uonfrskdnu" path="res://assets/sound/test/Cut_a_Rug.wav" id="2_a8d5k"]
+
+[node name="AudioPlayerUI" type="HBoxContainer" unique_id=1993156694 node_paths=PackedStringArray("play_button", "progress_bar", "time_label", "player")]
+offset_right = 315.0
+offset_bottom = 53.0
+script = ExtResource("1_vgynl")
+play_button = NodePath("Button")
+progress_bar = NodePath("ProgressBar")
+time_label = NodePath("Label2")
+player = NodePath("AudioStreamPlayer")
+pause_string = "⏸ "
+
+[node name="Button" type="Button" parent="." unique_id=837675486]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "▶️"
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=1952323294]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+show_percentage = false
+
+[node name="Label2" type="Label" parent="." unique_id=58233477]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "0:20 / 1:20"
+horizontal_alignment = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=155043568]
+stream = ExtResource("2_a8d5k")

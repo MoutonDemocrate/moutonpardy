@@ -1,0 +1,472 @@
+[gd_scene format=3 uid="uid://db683hd6vjw7g"]
+
+[ext_resource type="Script" uid="uid://do3nywgdduipl" path="res://scenes/menu/main_menu.gd" id="1_0e602"]
+[ext_resource type="Theme" uid="uid://vt1g3bkksiil" path="res://assets/default_theme.tres" id="1_ivi08"]
+[ext_resource type="PackedScene" uid="uid://de4v5i541e8a" path="res://scenes/game/main.tscn" id="2_7svta"]
+[ext_resource type="Resource" uid="uid://dfivt0417d2gf" path="res://assets/example_boards/example_board.tres" id="3_6fnnl"]
+[ext_resource type="Script" uid="uid://bd3reilsof4ot" path="res://scenes/menu/v_box_teams.gd" id="3_56qqr"]
+[ext_resource type="Script" uid="uid://ddtr4ubajwwwd" path="res://scenes/menu/new_game_tab.gd" id="4_6fgbm"]
+[ext_resource type="Script" uid="uid://bfmbebsqb8075" path="res://scenes/menu/v_box_boards.gd" id="4_6fnnl"]
+[ext_resource type="Script" uid="uid://d2xcpcpkhp36r" path="res://scenes/menu/manage_boards.gd" id="7_nqhsq"]
+[ext_resource type="Script" uid="uid://o2qefimrsbdq" path="res://scenes/menu/editor_tab.gd" id="7_qyd86"]
+[ext_resource type="PackedScene" uid="uid://c1q34oigmktf7" path="res://scenes/board_editor/board_editor.tscn" id="8_8j86p"]
+[ext_resource type="PackedScene" uid="uid://8lcxvr4evx2j" path="res://scenes/menu/board_management_control.tscn" id="8_s6y1m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0e602"]
+
+[sub_resource type="GDScript" id="GDScript_7svta"]
+resource_name = "MainMenuButton"
+script/source = "extends Button
+
+@export var associated_tab: Control
+
+func _ready() -> void:
+	if associated_tab:
+		associated_tab.visibility_changed.connect(
+			func () -> void:
+				if associated_tab.visible:
+					self.toggled.emit(true)
+		)
+
+func _toggled(toggled_on: bool) -> void:
+	if not toggled_on :
+		self.set_pressed_no_signal(true)
+		return
+
+	for child:Button in get_parent_control().get_children():
+		if child == self :
+			pass
+		else :
+			child.set_pressed_no_signal(false)
+
+	associated_tab.show()
+"
+
+[sub_resource type="GDScript" id="GDScript_ivi08"]
+resource_name = "QuitButton"
+script/source = "extends Button
+
+@export var root: MainMenuClass
+
+func _pressed() -> void:
+	root.notification(NOTIFICATION_WM_CLOSE_REQUEST)
+"
+
+[sub_resource type="GDScript" id="GDScript_fp07o"]
+resource_name = "QuitDialog"
+script/source = "extends ConfirmationDialog
+
+func _ready() -> void:
+	self.confirmed.connect(get_tree().quit)
+	self.hide()
+"
+
+[node name="MainMenu" type="TabContainer" unique_id=1496652524 node_paths=PackedStringArray("menu", "main", "default_tab", "quit_dialog")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ivi08")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_0e602")
+current_tab = 0
+tabs_visible = false
+script = ExtResource("1_0e602")
+example_board = ExtResource("3_6fnnl")
+menu = NodePath("Menu")
+main = NodePath("Main")
+default_tab = NodePath("Menu/HBoxContainer/MainMenuTabs/Welcome")
+quit_dialog = NodePath("QuitDialog")
+
+[node name="Menu" type="PanelContainer" parent="." unique_id=1856274259]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HSplitContainer" parent="Menu" unique_id=2020917449]
+layout_mode = 2
+drag_area_highlight_in_editor = true
+
+[node name="MainMenuButtons" type="VBoxContainer" parent="Menu/HBoxContainer" unique_id=1923160432]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="Welcome" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=1455329349 node_paths=PackedStringArray("associated_tab")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Welcome"
+script = SubResource("GDScript_7svta")
+associated_tab = NodePath("../../MainMenuTabs/Welcome")
+
+[node name="New Game" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=442999334 node_paths=PackedStringArray("associated_tab")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "New Game"
+script = SubResource("GDScript_7svta")
+associated_tab = NodePath("../../MainMenuTabs/New Game")
+
+[node name="Board Editor" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=379344816 node_paths=PackedStringArray("associated_tab")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Board Editor"
+script = SubResource("GDScript_7svta")
+associated_tab = NodePath("../../MainMenuTabs/EditorTab")
+
+[node name="Manage Boards" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=608944302 node_paths=PackedStringArray("associated_tab")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Manage Boards"
+autowrap_mode = 3
+script = SubResource("GDScript_7svta")
+associated_tab = NodePath("../../MainMenuTabs/Manage Boards")
+
+[node name="Settings" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=297112912 node_paths=PackedStringArray("associated_tab")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Settings"
+script = SubResource("GDScript_7svta")
+associated_tab = NodePath("../../MainMenuTabs/Settings")
+
+[node name="Quit" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=1924531956 node_paths=PackedStringArray("root")]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+toggle_mode = true
+text = "Exit"
+script = SubResource("GDScript_ivi08")
+root = NodePath("../../../..")
+
+[node name="MainMenuTabs" type="TabContainer" parent="Menu/HBoxContainer" unique_id=609461624]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 2
+tabs_visible = false
+
+[node name="Welcome" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=2100002377]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/Welcome" unique_id=761903242]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Welcome" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=5556733]
+layout_mode = 2
+text = "Welcome to MoutonPardy !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeginBoards" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=1799104724]
+layout_mode = 2
+text = "To begin, create a Board or import one."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BeginGame" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=1470300689]
+layout_mode = 2
+text = "When your board is ready, click on the \"New Game\" button !"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=1763603385]
+layout_mode = 2
+theme_override_constants/separation = 146
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=1029396514]
+layout_mode = 2
+text = "This software is free and open-source."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="LinkButton" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=1169983539]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "You can view the source code on GitHub."
+
+[node name="Label3" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=362255309]
+layout_mode = 2
+text = "A project by MoutonDemocrate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="New Game" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=1020113037 node_paths=PackedStringArray("start_game_button", "error_label", "teams_setup", "boards_setup", "main_menu")]
+visible = false
+layout_mode = 2
+script = ExtResource("4_6fgbm")
+start_game_button = NodePath("VBoxContainer/HBoxContainer/StartButton")
+error_label = NodePath("VBoxContainer/HBoxContainer/ErrorLabel")
+teams_setup = NodePath("VBoxContainer/VBoxTeams")
+boards_setup = NodePath("VBoxContainer/VBoxBoards")
+main_menu = NodePath("../../../..")
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game" unique_id=306784319]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxTeams" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=1608785543 node_paths=PackedStringArray("new_team_button", "teams_container")]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("3_56qqr")
+new_team_button = NodePath("Container/VBoxContainer/New Team")
+teams_container = NodePath("Container/VBoxContainer")
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxTeams" unique_id=1688858407]
+layout_mode = 2
+text = "Set up your teams :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container" type="ScrollContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxTeams" unique_id=781508477]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 20
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxTeams/Container" unique_id=1174275311]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="New Team" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxTeams/Container/VBoxContainer" unique_id=1151914787]
+layout_mode = 2
+text = "Add a new team... "
+
+[node name="HSeparator" type="HSeparator" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=567558086]
+layout_mode = 2
+
+[node name="VBoxBoards" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=1941033914 node_paths=PackedStringArray("new_board_button", "board_container", "file_dialog")]
+layout_mode = 2
+theme_override_constants/separation = 15
+script = ExtResource("4_6fnnl")
+new_board_button = NodePath("Container/VBoxContainer/Button")
+board_container = NodePath("Container/VBoxContainer")
+file_dialog = NodePath("FileDialog")
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxBoards" unique_id=602047167]
+layout_mode = 2
+text = "Set up the boards :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Container" type="ScrollContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxBoards" unique_id=1223752049]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxBoards/Container" unique_id=2049295997]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxBoards/Container/VBoxContainer" unique_id=406621952]
+layout_mode = 2
+text = "Add a board..."
+
+[node name="FileDialog" type="FileDialog" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/VBoxBoards" unique_id=1440070040]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1237, 798)
+ok_button_text = "Open Board"
+mode_overrides_title = false
+file_mode = 0
+display_mode = 1
+access = 1
+root_subfolder = "boards"
+filters = PackedStringArray("*.tres,*res")
+use_native_dialog = true
+
+[node name="HSeparator2" type="HSeparator" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=204918637]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=623032684]
+layout_mode = 2
+text = "When you've finished setting up everything, just press \"Start Game\" !
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer" unique_id=104791951]
+layout_mode = 2
+
+[node name="ErrorLabel" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/HBoxContainer" unique_id=1364392230]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="StartButton" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/New Game/VBoxContainer/HBoxContainer" unique_id=1599304817]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 8
+text = " Start Game ! "
+
+[node name="EditorTab" type="TabContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=559961787 node_paths=PackedStringArray("not_the_editor", "new_board_button", "select_board_button", "editor", "board_management_tab")]
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+script = ExtResource("7_qyd86")
+not_the_editor = NodePath("Not The Board Editor")
+new_board_button = NodePath("Not The Board Editor/VBoxContainer/New Board")
+select_board_button = NodePath("Not The Board Editor/VBoxContainer/Select Board")
+editor = NodePath("Board Editor")
+board_management_tab = NodePath("../Manage Boards")
+metadata/_tab_index = 2
+
+[node name="Not The Board Editor" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab" unique_id=775149905]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab/Not The Board Editor" unique_id=646906337]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab/Not The Board Editor/VBoxContainer" unique_id=980159073]
+layout_mode = 2
+text = "To edit a board, either"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="New Board" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab/Not The Board Editor/VBoxContainer" unique_id=1406031894]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+text = "Create a new board"
+
+[node name="Label2" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab/Not The Board Editor/VBoxContainer" unique_id=190479591]
+layout_mode = 2
+text = "or"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Select Board" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab/Not The Board Editor/VBoxContainer" unique_id=921753051]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+text = "Select an existing board"
+
+[node name="Board Editor" parent="Menu/HBoxContainer/MainMenuTabs/EditorTab" unique_id=545056861 instance=ExtResource("8_8j86p")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Manage Boards" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=1213982618 node_paths=PackedStringArray("boards_vbox", "new_board_button", "import_board_button", "import_file_dialog", "delete_file_popup", "editor_tab")]
+visible = false
+layout_mode = 2
+script = ExtResource("7_nqhsq")
+boards_vbox = NodePath("VBoxContainer/ScrollContainer/AvailableBoardsVBox")
+new_board_button = NodePath("VBoxContainer/HBoxContainer/NewBoardButton")
+import_board_button = NodePath("VBoxContainer/HBoxContainer/ImportBoardButton")
+import_file_dialog = NodePath("ImportFileDialog")
+delete_file_popup = NodePath("DeletionDialogue")
+editor_tab = NodePath("../EditorTab")
+metadata/_tab_index = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards" unique_id=718998239]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer" unique_id=1245110546]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="NewBoardButton" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer/HBoxContainer" unique_id=651507100]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create New Board"
+
+[node name="ImportBoardButton" type="Button" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer/HBoxContainer" unique_id=1851099821]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Import Board"
+
+[node name="FolderPathLabel" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer" unique_id=433249437]
+self_modulate = Color(1, 1, 1, 0.6431373)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "Boards folder : "
+autowrap_mode = 3
+
+[node name="BoardsInFolderLabel" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer" unique_id=86982242]
+layout_mode = 2
+text = "Boards currently available :"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer" unique_id=1313826115]
+custom_minimum_size = Vector2(900, 600)
+layout_mode = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="AvailableBoardsVBox" type="VBoxContainer" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer/ScrollContainer" unique_id=50173462]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BoardManagementControl" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer/ScrollContainer/AvailableBoardsVBox" unique_id=30762810 instance=ExtResource("8_s6y1m")]
+layout_mode = 2
+
+[node name="TipLabel" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards/VBoxContainer" unique_id=2012202320]
+self_modulate = Color(1, 1, 1, 0.6431373)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+text = "Tip: you can hover on a board's name or path to see details about it!"
+autowrap_mode = 3
+
+[node name="DeletionDialogue" type="ConfirmationDialog" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards" unique_id=1249607599]
+oversampling_override = 1.0
+title = "WARNING"
+initial_position = 2
+size = Vector2i(566, 247)
+ok_button_text = "I'm Sure"
+cancel_button_text = "Abort!"
+
+[node name="ImportFileDialog" type="FileDialog" parent="Menu/HBoxContainer/MainMenuTabs/Manage Boards" unique_id=636236101]
+oversampling_override = 1.0
+title = "Import boards..."
+initial_position = 1
+size = Vector2i(1237, 798)
+ok_button_text = "Import Boards"
+mode_overrides_title = false
+file_mode = 1
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.tres,*res")
+use_native_dialog = true
+
+[node name="Settings" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=455870997]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="Label" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Settings" unique_id=1801364470]
+layout_mode = 2
+text = "No settings yet, but I plan on implementing them !"
+
+[node name="Main" parent="." unique_id=1936652858 instance=ExtResource("2_7svta")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="QuitDialog" type="ConfirmationDialog" parent="." unique_id=819799940]
+oversampling_override = 1.0
+title = "Quit"
+initial_position = 2
+size = Vector2i(735, 172)
+always_on_top = true
+content_scale_mode = 1
+ok_button_text = "Yes, I'm sure"
+dialog_text = "Are you sure you want to quit the application ?
+All unsaved progress will be lost."
+script = SubResource("GDScript_fp07o")

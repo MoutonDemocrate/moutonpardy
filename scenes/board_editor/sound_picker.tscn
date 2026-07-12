@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://bbrc58kvt534l"]
+
+[ext_resource type="Script" uid="uid://0cudqvhcuah4" path="res://scenes/board_editor/sound_picker.gd" id="1_k4rra"]
+[ext_resource type="PackedScene" uid="uid://b3ytmq2fyw35u" path="res://scenes/game/audio_player_ui.tscn" id="2_d6o0u"]
+
+[node name="SoundPicker" type="HBoxContainer" unique_id=659805472 node_paths=PackedStringArray("audio_player_ui", "select_button", "clear_button", "file_dialog")]
+offset_right = 869.0
+offset_bottom = 53.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 15
+script = ExtResource("1_k4rra")
+audio_player_ui = NodePath("HBoxContainer")
+select_button = NodePath("VBoxContainer/SelectButton")
+clear_button = NodePath("VBoxContainer/ClearButton")
+file_dialog = NodePath("FileDialog")
+
+[node name="HBoxContainer" parent="." unique_id=1993156694 instance=ExtResource("2_d6o0u")]
+layout_mode = 2
+size_flags_horizontal = 3
+show_time = false
+
+[node name="VBoxContainer" type="HBoxContainer" parent="." unique_id=297014359]
+custom_minimum_size = Vector2(159.605, 0)
+layout_mode = 2
+
+[node name="SelectButton" type="Button" parent="VBoxContainer" unique_id=1552545536]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Select Sound"
+
+[node name="ClearButton" type="Button" parent="VBoxContainer" unique_id=779901870]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Clear"
+
+[node name="FileDialog" type="FileDialog" parent="." unique_id=735812376]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+size = Vector2i(1101, 598)
+ok_button_text = "Select Image"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.svg;Image Files;image/png,image/jpeg,image/svg+xml")
+use_native_dialog = true

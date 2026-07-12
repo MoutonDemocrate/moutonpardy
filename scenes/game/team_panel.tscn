@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://cu2nsdqpp16ct"]
+
+[ext_resource type="Theme" uid="uid://vt1g3bkksiil" path="res://assets/default_theme.tres" id="1_1p3pw"]
+[ext_resource type="Script" uid="uid://d3kbdh3dxfmxo" path="res://scenes/game/team_panel.gd" id="2_ogegm"]
+
+[sub_resource type="GDScript" id="GDScript_1p3pw"]
+resource_name = "PointsLabel"
+script/source = "extends Label
+
+@export var spinbox: SpinBox
+
+func _gui_input(event: InputEvent) -> void:
+	if event is InputEventMouse:
+		if event is InputEventMouseButton:
+			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+				self.hide()
+				spinbox.show()
+"
+
+[node name="TeamPanel" type="PanelContainer" unique_id=170116313 node_paths=PackedStringArray("team_name_label", "points_label", "points_spinbox", "plus_button", "minus_button")]
+offset_right = 300.0
+offset_bottom = 113.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_1p3pw")
+script = ExtResource("2_ogegm")
+team_name_label = NodePath("VBoxContainer/TeamName")
+points_label = NodePath("VBoxContainer/HBoxContainer/Points")
+points_spinbox = NodePath("VBoxContainer/HBoxContainer/SpinBox")
+plus_button = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/PlusButton")
+minus_button = NodePath("VBoxContainer/HBoxContainer/VBoxContainer/MinusButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=249569841]
+layout_mode = 2
+
+[node name="TeamName" type="Label" parent="VBoxContainer" unique_id=280559013]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Les Galapagos"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=638011384]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Points" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=928074101 node_paths=PackedStringArray("spinbox")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_font_sizes/font_size = 50
+text = "700"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_1p3pw")
+spinbox = NodePath("../SpinBox")
+
+[node name="SpinBox" type="SpinBox" parent="VBoxContainer/HBoxContainer" unique_id=713012580]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme = ExtResource("1_1p3pw")
+min_value = -99999.0
+max_value = 99999.0
+value = 99999.0
+rounded = true
+alignment = 1
+
+[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=759823941]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlusButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=283057422]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "+"
+
+[node name="MinusButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1198887349]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 16
+text = "-"

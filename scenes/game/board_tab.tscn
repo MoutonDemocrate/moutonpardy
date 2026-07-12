@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://nwtbhkanoa1u"]
+
+[ext_resource type="Script" uid="uid://8pg2esisiyij" path="res://scenes/game/board_tab.gd" id="1_73v16"]
+[ext_resource type="PackedScene" uid="uid://c3selklkp2m3q" path="res://scenes/game/question_column.tscn" id="2_la32i"]
+
+[node name="Questions" type="HBoxContainer" unique_id=705931955 node_paths=PackedStringArray("column_container")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_73v16")
+column_container = NodePath("HBoxContainer")
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=395396645]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="QuestionColumn" parent="HBoxContainer" unique_id=303164309 instance=ExtResource("2_la32i")]
+layout_mode = 2

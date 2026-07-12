@@ -1,0 +1,20 @@
+[gd_resource type="Theme" format=3 uid="uid://vt1g3bkksiil"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_o54fn"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+color = Color(1, 1, 1, 0.26666668)
+grow_begin = -50.0
+grow_end = -50.0
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ivi08"]
+bg_color = Color(0, 0, 0, 0.14509805)
+
+[resource]
+default_font_size = 32
+HSeparator/styles/separator = SubResource("StyleBoxLine_o54fn")
+LineEdit/font_sizes/font_size = 32
+ScrollContainer/styles/panel = SubResource("StyleBoxFlat_ivi08")
