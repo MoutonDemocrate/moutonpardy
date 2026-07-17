@@ -14,7 +14,8 @@ thickness = 2
 bg_color = Color(0, 0, 0, 0.14509805)
 
 [resource]
-default_font_size = 32
+default_font_size = 20
 HSeparator/styles/separator = SubResource("StyleBoxLine_o54fn")
 LineEdit/font_sizes/font_size = 32
 ScrollContainer/styles/panel = SubResource("StyleBoxFlat_ivi08")
+SplitContainer/constants/autohide = 0

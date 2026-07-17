@@ -5,11 +5,10 @@ class_name Board
 @export var columns: Array[Column]
 
 func _to_string() -> String:
-	var stringed: String = self.board_name
-	stringed += " : "
+	var stringed: String = self.board_name + " :"
 	for column:Column in columns:
-		stringed += column.title + ", "
-	stringed = stringed.substr(0, len(stringed)-2)
+		stringed += "\n· "+ str(column) + " × " + str(column.get_question_points()).replace("[","(").replace("]",")")
+	#stringed = stringed.substr(0, len(stringed)-2)
 	return stringed
 
 func apply_multiplier(multiplier:int) -> Board:

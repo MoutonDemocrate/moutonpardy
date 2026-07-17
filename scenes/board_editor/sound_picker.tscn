@@ -41,5 +41,5 @@ size = Vector2i(1101, 598)
 ok_button_text = "Select Image"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.png,*.jpg,*.jpeg,*.svg;Image Files;image/png,image/jpeg,image/svg+xml")
+filters = PackedStringArray("*.wav,*.mp3,*.ogg;Sound Files;audio/ogg,audio/ogg,audio/vnd.wave,audio/mpeg")
 use_native_dialog = true

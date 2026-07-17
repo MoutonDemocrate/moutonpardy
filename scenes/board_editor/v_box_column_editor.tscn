@@ -2,27 +2,49 @@
 
 [ext_resource type="Script" uid="uid://n6oq87n3dd75" path="res://scenes/board_editor/v_box_column_editor.gd" id="1_bjqpf"]
 
-[node name="VBoxColumnEditor" type="VBoxContainer" unique_id=1133123002 node_paths=PackedStringArray("category_text_edit", "add_button")]
+[node name="VBoxColumnEditor" type="VBoxContainer" unique_id=1133123002 node_paths=PackedStringArray("category_text_edit", "add_button", "delete_button")]
 custom_minimum_size = Vector2(200, 0)
-custom_maximum_size = Vector2(300, -1)
-offset_right = 292.0
-offset_bottom = 229.0
+custom_maximum_size = Vector2(500, -1)
+offset_right = 200.0
+offset_bottom = 648.0
 size_flags_horizontal = 3
 script = ExtResource("1_bjqpf")
 category_text_edit = NodePath("TextEdit")
-add_button = NodePath("Add a question")
+add_button = NodePath("HBoxContainer/Add a question")
+delete_button = NodePath("HBoxContainer/Delete Column")
 
 [node name="TextEdit" type="TextEdit" parent="." unique_id=1552730504]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
+size_flags_horizontal = 3
+text = "LET'S SEE IF THIS TEXT WRAPS UP NORMALLY OR NOT"
 placeholder_text = "Untitled Category"
+wrap_mode = 1
+scroll_smooth = true
+scroll_fit_content_height = true
 
 [node name="HSeparator" type="HSeparator" parent="." unique_id=1043217072]
 layout_mode = 2
 
-[node name="Add a question" type="Button" parent="." unique_id=863077811]
-modulate = Color(1, 1, 1, 0.7019608)
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=158559122]
 custom_maximum_size = Vector2(-1, 200)
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Add a question" type="Button" parent="HBoxContainer" unique_id=863077811]
+modulate = Color(1, 1, 1, 0.7019608)
+custom_maximum_size = Vector2(-1, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 text = "+ Add a question..."
+text_overrun_behavior = 5
+autowrap_mode = 3
+
+[node name="Delete Column" type="Button" parent="HBoxContainer" unique_id=1320399504]
+modulate = Color(1, 1, 1, 0.7019608)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "- Delete column..."
+text_overrun_behavior = 5
+autowrap_mode = 3

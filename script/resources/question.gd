@@ -2,14 +2,14 @@ extends Resource
 class_name Question
 
 ## Question text
-@export var text: String = "This is a question example. You shouldn't see this."
+@export var text: String = ""
 ## Question image
 @export var image: Texture2D
 ## Question sound
 @export var sound: AudioStream
 
 ## Answer text
-@export var answer_text: String = "This is the anwser example, you shouldn't see this."
+@export var answer_text: String = ""
 ## Answer image
 @export var answer_image: Texture2D
 ## Question sound

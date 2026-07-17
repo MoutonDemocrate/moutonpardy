@@ -2,9 +2,23 @@
 
 [ext_resource type="Script" uid="uid://cff8lp15twgqx" path="res://scenes/board_editor/editor_question_button.gd" id="1_tpe8c"]
 
-[node name="EditorQuestionButton" type="Button" unique_id=100682392]
+[node name="EditorQuestionButton" type="Button" unique_id=100682392 node_paths=PackedStringArray("kill_button")]
 custom_minimum_size = Vector2(0, 100)
 custom_maximum_size = Vector2(-1, 300)
+offset_right = 150.0
+offset_bottom = 100.0
 size_flags_vertical = 3
 text = "100"
 script = ExtResource("1_tpe8c")
+kill_button = NodePath("KillButton")
+
+[node name="KillButton" type="Button" parent="." unique_id=1171908666]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "X"

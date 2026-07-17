@@ -16,12 +16,27 @@ class_name BoardEditorSidebar
 signal question_saved(question:Question)
 
 func _ready() -> void:
-	current_question = null
-	spin_box_worth.value_changed.connect(save_question_sanitised)
-	question_text_edit.text_changed.connect(save_question_sanitised)
+	clear()
+	spin_box_worth.mouse_exited.connect(
+		func () -> void:
+			if current_question :
+				if roundi(spin_box_worth.value) != current_question.worth :
+					save_question_sanitised(spin_box_worth.value)
+				)
+	question_text_edit.mouse_exited.connect(
+		func () -> void:
+			if current_question :
+				if current_question.text != question_text_edit.text :
+					save_question_sanitised(question_text_edit.text)
+				)
 	question_image_picker.texture_changed.connect(save_question_sanitised)
 	question_sound_picker.stream_changed.connect(save_question_sanitised)
-	answer_text_edit.text_changed.connect(save_question_sanitised)
+	answer_text_edit.mouse_exited.connect(
+		func () -> void:
+			if current_question :
+				if current_question.answer_text != answer_text_edit.text :
+					save_question_sanitised(answer_text_edit.text)
+				)
 	answer_image_picker.texture_changed.connect(save_question_sanitised)
 	answer_sound_picker.stream_changed.connect(save_question_sanitised)
 
@@ -37,6 +52,19 @@ func load_question(question:Question) -> void:
 	answer_text_edit.text = question.answer_text
 	answer_image_picker.load_texture_no_signal(question.answer_image)
 	answer_sound_picker.load_stream_no_signal(question.answer_sound)
+
+func clear() -> void:
+	current_question = null
+
+	spin_box_worth.set_value_no_signal(0)
+
+	question_text_edit.text = ""
+	question_image_picker.load_texture_no_signal(null)
+	question_sound_picker.load_stream_no_signal(null)
+
+	answer_text_edit.text = ""
+	answer_image_picker.load_texture_no_signal(null)
+	answer_sound_picker.load_stream_no_signal(null)
 
 func save_question_sanitised(...args:Array) -> void:
 	print("Question : ", question_text_edit.text)
@@ -55,3 +83,5 @@ func save_question() -> void:
 		current_question.answer_sound	= answer_sound_picker.get_stream()
 
 		question_saved.emit(current_question)
+	else :
+		print("No question loaded : : No Saving !")

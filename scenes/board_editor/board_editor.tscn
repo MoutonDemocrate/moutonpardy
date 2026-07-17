@@ -98,134 +98,133 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ck11k")
 script = ExtResource("3_71qcl")
-spin_box_worth = NodePath("VBoxSideBar/PointsWorth/SpinBox")
-question_text_edit = NodePath("VBoxSideBar/QuestionText/QuestionTextEdit")
-question_image_picker = NodePath("VBoxSideBar/QuestionImage/TexturePicker")
-question_sound_picker = NodePath("VBoxSideBar/QuestionSound/SoundPicker")
-answer_text_edit = NodePath("VBoxSideBar/AnswerText/AnswerTextEdit")
-answer_image_picker = NodePath("VBoxSideBar/AnswerImage/TexturePicker")
-answer_sound_picker = NodePath("VBoxSideBar/AnswerSound/SoundPicker")
+spin_box_worth = NodePath("VSplitContainer/VBoxSideBarQuestion/PointsWorth/SpinBox")
+question_text_edit = NodePath("VSplitContainer/VBoxSideBarQuestion/QuestionText/QuestionTextEdit")
+question_image_picker = NodePath("VSplitContainer/VBoxSideBarQuestion/QuestionImage/TexturePicker")
+question_sound_picker = NodePath("VSplitContainer/VBoxSideBarQuestion/QuestionSound/SoundPicker")
+answer_text_edit = NodePath("VSplitContainer/VBoxContainer/AnswerText/AnswerTextEdit")
+answer_image_picker = NodePath("VSplitContainer/VBoxContainer/AnswerImage/TexturePicker")
+answer_sound_picker = NodePath("VSplitContainer/VBoxContainer/AnswerSound/SoundPicker")
 
-[node name="VBoxSideBar" type="VBoxContainer" parent="Sidebar" unique_id=1274684288]
+[node name="VSplitContainer" type="VSplitContainer" parent="Sidebar" unique_id=1592817066]
+layout_mode = 2
+theme_override_constants/separation = 25
+split_offsets = PackedInt32Array(573)
+split_offset = 573
+
+[node name="VBoxSideBarQuestion" type="VBoxContainer" parent="Sidebar/VSplitContainer" unique_id=1274684288]
 layout_mode = 2
 
-[node name="Questions" type="Label" parent="Sidebar/VBoxSideBar" unique_id=592404285]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Question Editor"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Sidebar/VBoxSideBar" unique_id=73945754]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="PointsWorth" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=595937313]
+[node name="PointsWorth" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion" unique_id=595937313]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/PointsWorth" unique_id=2014447648]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/PointsWorth" unique_id=2014447648]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 text = "Points Worth : "
 horizontal_alignment = 2
 
-[node name="SpinBox" type="SpinBox" parent="Sidebar/VBoxSideBar/PointsWorth" unique_id=484556670]
+[node name="SpinBox" type="SpinBox" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/PointsWorth" unique_id=484556670]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 min_value = -99999.0
 max_value = 99999.0
 rounded = true
 
-[node name="QuestionText" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1140757844]
+[node name="HSeparator" type="HSeparator" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion" unique_id=1287152705]
+layout_mode = 2
+
+[node name="QuestionText" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion" unique_id=1140757844]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionText" unique_id=909870381]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionText" unique_id=909870381]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Question
 Text : "
 horizontal_alignment = 2
 
-[node name="QuestionTextEdit" type="TextEdit" parent="Sidebar/VBoxSideBar/QuestionText" unique_id=978327112]
+[node name="QuestionTextEdit" type="TextEdit" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionText" unique_id=978327112]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "ex: This French iron tower is a symbol of the city of Paris."
 wrap_mode = 1
 scroll_smooth = true
 scroll_past_end_of_file = true
+scroll_fit_content_height = true
 
-[node name="QuestionImage" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1708137138]
+[node name="QuestionImage" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion" unique_id=1708137138]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionImage" unique_id=1403063694]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionImage" unique_id=1403063694]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Image : "
 horizontal_alignment = 2
 
-[node name="TexturePicker" parent="Sidebar/VBoxSideBar/QuestionImage" unique_id=283436648 instance=ExtResource("3_ck11k")]
+[node name="TexturePicker" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionImage" unique_id=283436648 instance=ExtResource("3_ck11k")]
 layout_mode = 2
 
-[node name="QuestionSound" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1791702157]
+[node name="QuestionSound" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion" unique_id=1791702157]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/QuestionSound" unique_id=757043412]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionSound" unique_id=757043412]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Sound : "
 horizontal_alignment = 2
 
-[node name="SoundPicker" parent="Sidebar/VBoxSideBar/QuestionSound" unique_id=659805472 instance=ExtResource("4_g2jkl")]
+[node name="SoundPicker" parent="Sidebar/VSplitContainer/VBoxSideBarQuestion/QuestionSound" unique_id=659805472 instance=ExtResource("4_g2jkl")]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="Sidebar/VBoxSideBar" unique_id=1484690500]
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar/VSplitContainer" unique_id=713711304]
 layout_mode = 2
-theme_override_constants/separation = 20
 
-[node name="AnswerText" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=1067749790]
+[node name="AnswerText" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxContainer" unique_id=1067749790]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.5
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerText" unique_id=1531385688]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerText" unique_id=1531385688]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Answer : "
 horizontal_alignment = 2
 
-[node name="AnswerTextEdit" type="TextEdit" parent="Sidebar/VBoxSideBar/AnswerText" unique_id=1392964960]
+[node name="AnswerTextEdit" type="TextEdit" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerText" unique_id=1392964960]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "ex: Eiffel Tower"
 wrap_mode = 1
 scroll_smooth = true
 scroll_past_end_of_file = true
+scroll_fit_content_height = true
 
-[node name="AnswerImage" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=545530723]
+[node name="AnswerImage" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxContainer" unique_id=545530723]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerImage" unique_id=1415318926]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerImage" unique_id=1415318926]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Answer
 Image : "
 horizontal_alignment = 2
 
-[node name="TexturePicker" parent="Sidebar/VBoxSideBar/AnswerImage" unique_id=931704544 instance=ExtResource("3_ck11k")]
+[node name="TexturePicker" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerImage" unique_id=931704544 instance=ExtResource("3_ck11k")]
 layout_mode = 2
 
-[node name="AnswerSound" type="HBoxContainer" parent="Sidebar/VBoxSideBar" unique_id=700636034]
+[node name="AnswerSound" type="HBoxContainer" parent="Sidebar/VSplitContainer/VBoxContainer" unique_id=700636034]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Sidebar/VBoxSideBar/AnswerSound" unique_id=502342166]
+[node name="Label" type="Label" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerSound" unique_id=502342166]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Answer
 Sound : "
 horizontal_alignment = 2
 
-[node name="SoundPicker" parent="Sidebar/VBoxSideBar/AnswerSound" unique_id=2145516111 instance=ExtResource("4_g2jkl")]
+[node name="SoundPicker" parent="Sidebar/VSplitContainer/VBoxContainer/AnswerSound" unique_id=2145516111 instance=ExtResource("4_g2jkl")]
 layout_mode = 2

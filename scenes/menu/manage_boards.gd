@@ -11,6 +11,10 @@ class_name ManageBoardsTab
 @export var editor_tab: EditorMenuTab
 
 func _ready() -> void:
+	new_board_button.pressed.connect(
+		func () -> void:
+			new_board()
+	)
 	import_board_button.pressed.connect(import_file_dialog.show)
 	import_file_dialog.files_selected.connect(import_boards)
 	import_file_dialog.file_selected.connect(
@@ -52,11 +56,11 @@ func delete_board(from_board_control:BoardManagementControl) -> void:
 	)
 
 func new_board() -> void:
-	editor_tab.show()
+	editor_tab.visible = true
 	editor_tab.edit_new_board()
 
 func edit_board(board:Board) -> void:
-	editor_tab.show()
+	editor_tab.visible = true
 	editor_tab.edit_board(board)
 
 func update_boards_vbox() -> void:

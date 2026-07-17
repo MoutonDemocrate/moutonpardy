@@ -11,7 +11,7 @@ signal texture_changed(texture:Texture2D)
 func _ready() -> void:
 	clear_button.pressed.connect(
 		func () -> void:
-			texture_rect.texture = null
+			load_texture(null)
 	)
 	select_button.pressed.connect(file_dialog.show)
 	file_dialog.file_selected.connect(
@@ -20,7 +20,7 @@ func _ready() -> void:
 			image.load(path)
 			if is_instance_valid(image):
 				var image_texture := ImageTexture.create_from_image(image)
-				texture_rect.texture = image_texture
+				load_texture(image_texture)
 	)
 
 func load_texture(texture:Texture2D) -> void:

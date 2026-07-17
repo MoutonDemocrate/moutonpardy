@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5v64u"]
 
-[node name="Presentation" type="TabContainer" unique_id=1897908289 node_paths=PackedStringArray("question_half", "question_category_title", "question_label", "question_texture_rect", "question_player", "reveal_answer_button", "answer_half", "answer_category_title", "answer_label", "answer_texture_rect", "see_question_again_button", "back_to_board_button")]
+[node name="Presentation" type="TabContainer" unique_id=1897908289 node_paths=PackedStringArray("question_half", "question_category_title", "question_label", "question_texture_rect", "question_player", "reveal_answer_button", "answer_half", "answer_category_title", "answer_label", "answer_texture_rect", "answer_player", "see_question_again_button", "back_to_board_button")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,6 +28,7 @@ answer_half = NodePath("Answer")
 answer_category_title = NodePath("Answer/Label")
 answer_label = NodePath("Answer/CenterContainer/VBoxContainer/Label")
 answer_texture_rect = NodePath("Answer/CenterContainer/VBoxContainer/TextureRect")
+answer_player = NodePath("Answer/CenterContainer/VBoxContainer/HBoxContainer")
 see_question_again_button = NodePath("Answer/HBoxContainer/BackToQuestion")
 back_to_board_button = NodePath("Answer/HBoxContainer/BackToBoard")
 metadata/_tab_index = 1

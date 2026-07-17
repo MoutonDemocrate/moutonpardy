@@ -18,19 +18,36 @@
 resource_name = "MainMenuButton"
 script/source = "extends Button
 
-@export var associated_tab: Control
+@export var associated_tab: Control :
+	set(new):
+		associated_tab = new
+		new.visibility_changed.connect(
+			func () -> void:
+				#print(associated_tab, \" visibility has changed\")
+				if associated_tab.visible:
+					self.set_pressed_no_signal(true)
+					_toggled(true)
+				#else:
+					#print(associated_tab, \" is hidden, no signal emitted.\")
+		)
 
 func _ready() -> void:
 	if associated_tab:
 		associated_tab.visibility_changed.connect(
 			func () -> void:
+				#print(associated_tab, \" visibility has changed\")
 				if associated_tab.visible:
-					self.toggled.emit(true)
+					self.set_pressed_no_signal(true)
+					_toggled(true)
+				#else:
+					#print(associated_tab, \" is hidden, no signal emitted.\")
 		)
 
 func _toggled(toggled_on: bool) -> void:
+	#print(\"Toggling \", self, \" \", \"on\" if toggled_on else \"off\")
 	if not toggled_on :
 		self.set_pressed_no_signal(true)
+		#print(\"Tried to toggle off, returning...\")
 		return
 
 	for child:Button in get_parent_control().get_children():
@@ -38,7 +55,9 @@ func _toggled(toggled_on: bool) -> void:
 			pass
 		else :
 			child.set_pressed_no_signal(false)
+			#print(\"Setting \", child, \" to off by \", self)
 
+	#print(\"Showing tab \", associated_tab, \"...\")
 	associated_tab.show()
 "
 
@@ -94,7 +113,7 @@ size_flags_stretch_ratio = 0.2
 [node name="Welcome" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=1455329349 node_paths=PackedStringArray("associated_tab")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Welcome"
 script = SubResource("GDScript_7svta")
@@ -103,7 +122,7 @@ associated_tab = NodePath("../../MainMenuTabs/Welcome")
 [node name="New Game" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=442999334 node_paths=PackedStringArray("associated_tab")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "New Game"
 script = SubResource("GDScript_7svta")
@@ -112,7 +131,7 @@ associated_tab = NodePath("../../MainMenuTabs/New Game")
 [node name="Board Editor" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=379344816 node_paths=PackedStringArray("associated_tab")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Board Editor"
 script = SubResource("GDScript_7svta")
@@ -121,7 +140,7 @@ associated_tab = NodePath("../../MainMenuTabs/EditorTab")
 [node name="Manage Boards" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=608944302 node_paths=PackedStringArray("associated_tab")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Manage Boards"
 autowrap_mode = 3
@@ -131,7 +150,7 @@ associated_tab = NodePath("../../MainMenuTabs/Manage Boards")
 [node name="Settings" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=297112912 node_paths=PackedStringArray("associated_tab")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Settings"
 script = SubResource("GDScript_7svta")
@@ -140,7 +159,7 @@ associated_tab = NodePath("../../MainMenuTabs/Settings")
 [node name="Quit" type="Button" parent="Menu/HBoxContainer/MainMenuButtons" unique_id=1924531956 node_paths=PackedStringArray("root")]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 30
 toggle_mode = true
 text = "Exit"
 script = SubResource("GDScript_ivi08")
@@ -149,11 +168,10 @@ root = NodePath("../../../..")
 [node name="MainMenuTabs" type="TabContainer" parent="Menu/HBoxContainer" unique_id=609461624]
 layout_mode = 2
 size_flags_horizontal = 3
-current_tab = 2
+current_tab = 0
 tabs_visible = false
 
 [node name="Welcome" type="CenterContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=2100002377]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -193,6 +211,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 text = "You can view the source code on GitHub."
+uri = "https://github.com/MoutonDemocrate/moutonpardy"
 
 [node name="Label3" type="Label" parent="Menu/HBoxContainer/MainMenuTabs/Welcome/VBoxContainer" unique_id=362255309]
 layout_mode = 2
@@ -314,6 +333,7 @@ size_flags_horizontal = 8
 text = " Start Game ! "
 
 [node name="EditorTab" type="TabContainer" parent="Menu/HBoxContainer/MainMenuTabs" unique_id=559961787 node_paths=PackedStringArray("not_the_editor", "new_board_button", "select_board_button", "editor", "board_management_tab")]
+visible = false
 layout_mode = 2
 current_tab = 0
 tabs_visible = false

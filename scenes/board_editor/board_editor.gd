@@ -5,6 +5,8 @@ class_name BoardEditor
 @export var main_half: EditorMainHalf
 @export var sidebar: BoardEditorSidebar
 
+var block_saving: bool = false
+
 func _ready() -> void:
 	sidebar.question_saved.connect(
 		func (_q:Question) -> void: save_board()
@@ -12,10 +14,18 @@ func _ready() -> void:
 
 func start_board_edition(new_board:Board) -> void:
 	self.show()
+	block_saving = true
 	current_board = new_board
 	main_half.start_editing(new_board)
+	block_saving = false
 
 func save_board() -> void:
+	if block_saving :
+		print("Saving blocked!")
+		return
+
+	Input.set_default_cursor_shape(Input.CURSOR_WAIT)
+
 	print()
 	print(" --- Saving board ", current_board," ...")
 	# We delete the old board
@@ -40,4 +50,10 @@ func save_board() -> void:
 	var nerror := ResourceSaver.save(current_board, save_location)
 	if nerror != Error.OK:
 		print("Error with "+ current_board.resource_path +" : ", error_string(error))
+	else :
+		print("# # # Saved information # # #")
+		print(current_board)
+		print("# # # # # # # # # # # # # # #")
 	print()
+
+	Input.set_default_cursor_shape(Input.CURSOR_ARROW)
